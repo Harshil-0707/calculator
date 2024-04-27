@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --black: #000;
+  --poppins: "Poppins";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: var(--poppins);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#container {
+  padding: 1.1rem;
+  border-radius: 15px;
+  border: 2px solid var(--black);
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-block: 1.5rem 1.8rem;
+}
+
+/* input section */
+
+#getInput {
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 20.7rem;
+  text-align: right;
+  padding: 3rem 1rem 0 1rem;
+  border: 2px solid var(--black);
+}
+
+input::placeholder,
+input {
+  font-size: 3rem;
+  color: var(--black);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="text"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* buttons */
+
+button {
+  padding: 0.7rem;
+  font-size: 1.2rem;
+  color: var(--black);
+  border: 2px solid var(--black);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#buttons {
+  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.spanGrid {
+  grid-column: 1/3;
+}
