@@ -1,6 +1,7 @@
 let firstVal = "";
-let secondVal = "";
 let operator = "";
+let secondVal = "";
+const span = document.querySelector("span");
 const numBtn = document.querySelectorAll(".numBtn");
 const funcBtns = document.querySelectorAll(".funcBtn");
 const userInput = document.querySelector(".userInput");
@@ -15,25 +16,6 @@ funcBtns.forEach((btn) => {
   });
 });
 
-function clearInput(funcBtn, value) {
-  let updateValue = value;
-  if (funcBtn === "C") {
-    userInput.value = "0";
-    value = "";
-  } else {
-    if (userInput.value.length >= 1) {
-      userInput.value = value.slice(0, -1);
-      updateValue = value.slice(0, -1);
-      value = updateValue;
-      if (userInput.value.length == 0) {
-        userInput.value = "0";
-        value = "";
-      }
-    }
-  }
-  return value;
-}
-
 numBtn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const numBtnChar = getChar(e);
@@ -44,12 +26,68 @@ numBtn.forEach((btn) => {
           : (firstVal = addDot(numBtnChar, firstVal));
         break;
       default:
-        operator
-          ? (secondVal = addNum(numBtnChar, secondVal))
-          : (firstVal = addNum(numBtnChar, firstVal));
+        if (operator) {
+          secondVal = addNum(numBtnChar, secondVal);
+          span.textContent = `${firstVal} ${operator} ${secondVal}`;
+        } else {
+          firstVal = addNum(numBtnChar, firstVal);
+        }
     }
   });
 });
+
+operatorBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const userChoiceOperator = getChar(e);
+    if (userChoiceOperator === "=") {
+      calculate(operator);
+    } else {
+      operator = userChoiceOperator;
+      span.textContent = firstVal + " " + operator;
+    }
+  });
+});
+
+function calculate(operatorSign) {
+  signs = {
+    "+": +firstVal + +secondVal,
+    "-": +firstVal - +secondVal,
+    "÷": +firstVal / +secondVal,
+    "×": +firstVal * +secondVal,
+    "%": (+firstVal * +secondVal) / 100,
+  };
+  userInput.value = signs[operatorSign];
+  firstVal = userInput.value;
+  secondVal = "";
+}
+
+function clearInput(funcBtn, value) {
+  let updateValue = value;
+  if (funcBtn === "C") {
+    userInput.value = "0";
+    span.textContent = "";
+    clearValues();
+  } else {
+    if (userInput.value.length >= 1) {
+      userInput.value = value.slice(0, -1);
+      updateValue = value.slice(0, -1);
+      value = updateValue;
+      if (userInput.value.length == 0) {
+        userInput.value = "0";
+        clearValues();
+      }
+      span.textContent = value;
+    }
+  }
+  return value;
+}
+
+function clearValues() {
+  firstVal = "";
+  secondVal = "";
+  operator = "";
+  value = "";
+}
 
 function addDot(dot, value) {
   if (!userInput.value.includes(".")) {
@@ -60,7 +98,6 @@ function addDot(dot, value) {
 }
 
 function addNum(num, value) {
-  console.log(value);
   value += num;
   userInput.value = value;
   return value;

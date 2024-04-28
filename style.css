@@ -34,7 +34,14 @@ h1 {
 /* input section */
 
 #getInput {
+  position: relative;
   margin-bottom: 1rem;
+}
+
+span {
+  top: 0.5rem;
+  right: 1.5rem;
+  position: absolute;
 }
 
 input {
