@@ -46,7 +46,7 @@ document.body.addEventListener("keydown", handleKeyBoardEvent);
 
 // Handle KeyBoard Events
 function handleKeyBoardEvent(e) {
-  if (+e.key) {
+  if (+e.key >= 0 || +e.key <= 9) {
     inputValue += +e.key;
     userInput.value = inputValue;
     span.textContent = inputValue;
