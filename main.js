@@ -20,17 +20,16 @@ funcBtns.forEach((btn) => {
 
 // Clear value for <input> tag
 function clearInput(funcBtn, value) {
-  let updateValue = value;
   if (funcBtn === "C") {
     userInput.value = "0";
     span.textContent = "";
     value = "";
     clearValues();
   } else {
+    console.log(userInput.value.length);
     if (userInput.value.length >= 1) {
-      userInput.value = value.slice(0, -1);
-      updateValue = value.slice(0, -1);
-      value = updateValue;
+      value = userInput.value.slice(0, -1);
+      userInput.value = value;
       if (userInput.value.length == 0) {
         userInput.value = "0";
         clearValues();
